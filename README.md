@@ -7,6 +7,8 @@ mSTAGRAM is made by Starbudweiser & Claude Code (Anthropic). Part of the **DESKT
 
 **mSTAGRAM is an independent project. It is not affiliated with, endorsed by or sponsored by Instagram or Meta. "Instagram" is a trademark of Meta Platforms, Inc.; no Instagram logo or brand asset is used here. The app only displays the public instagram.com website.**
 
+![The mSTAGRAM iPhone-style window showing a neutral web page in dark mode.](docs/screenshot.png)
+
 ## What it does
 mSTAGRAM shows instagram.com in its **phone version**, inside a window styled as an **iPhone 17 Pro Max** (titanium frame, Dynamic Island, status bar). It presents itself as an iPhone, so the mobile layout is served. This is useful because some settings (for example the profile link) are only editable from the phone version. Instagram may still keep some settings reserved to its native app.
 
