@@ -9,25 +9,25 @@ enum L10n {
         return ["fr", "en", "es", "it"].contains(String(code)) ? String(code) : "en"
     }()
     static let table: [String: [String: String]] = [
-        "fr": ["menu.skin": "Coloris", "skin.orange": "Orange cosmique", "skin.blue": "Bleu intense", "skin.silver": "Argent", "menu.close": "Fermer", "menu.minimize": "Réduire", "menu.about": "À propos de mSTAGRAM", "menu.quit": "Quitter mSTAGRAM", "menu.nav": "Navigation",
+        "fr": ["skin.titanium": "Titane naturel", "skin.black": "Titane noir", "skin.white": "Titane blanc", "skin.desert": "Titane désert", "menu.skin": "Coloris", "skin.orange": "Orange cosmique", "skin.blue": "Bleu intense", "skin.silver": "Argent", "menu.close": "Fermer", "menu.minimize": "Réduire", "menu.about": "À propos de mSTAGRAM", "menu.quit": "Quitter mSTAGRAM", "menu.nav": "Navigation",
                "menu.reload": "Recharger", "menu.back": "Précédent", "menu.home": "Accueil", "menu.window": "Fenêtre",
                "about.title": "À propos", "about.version": "Version %@ (%@)",
                "about.tagline": "Instagram en version téléphone, dans une fenêtre sur le Mac.",
                "about.authors": "starbudweiser", "about.license": "Licence MIT",
                "about.disclaimer": "Outil personnel indépendant, non affilié à Instagram ni à Meta."],
-        "en": ["menu.skin": "Finish", "skin.orange": "Cosmic Orange", "skin.blue": "Deep Blue", "skin.silver": "Silver", "menu.close": "Close", "menu.minimize": "Minimize", "menu.about": "About mSTAGRAM", "menu.quit": "Quit mSTAGRAM", "menu.nav": "Navigation",
+        "en": ["skin.titanium": "Natural Titanium", "skin.black": "Black Titanium", "skin.white": "White Titanium", "skin.desert": "Desert Titanium", "menu.skin": "Finish", "skin.orange": "Cosmic Orange", "skin.blue": "Deep Blue", "skin.silver": "Silver", "menu.close": "Close", "menu.minimize": "Minimize", "menu.about": "About mSTAGRAM", "menu.quit": "Quit mSTAGRAM", "menu.nav": "Navigation",
                "menu.reload": "Reload", "menu.back": "Back", "menu.home": "Home", "menu.window": "Window",
                "about.title": "About", "about.version": "Version %@ (%@)",
                "about.tagline": "Instagram in its phone version, in a window on your Mac.",
                "about.authors": "starbudweiser", "about.license": "MIT licence",
                "about.disclaimer": "Independent personal tool, not affiliated with Instagram or Meta."],
-        "es": ["menu.skin": "Acabado", "skin.orange": "Naranja cósmico", "skin.blue": "Azul intenso", "skin.silver": "Plata", "menu.close": "Cerrar", "menu.minimize": "Minimizar", "menu.about": "Acerca de mSTAGRAM", "menu.quit": "Salir de mSTAGRAM", "menu.nav": "Navegación",
+        "es": ["skin.titanium": "Titanio natural", "skin.black": "Titanio negro", "skin.white": "Titanio blanco", "skin.desert": "Titanio desierto", "menu.skin": "Acabado", "skin.orange": "Naranja cósmico", "skin.blue": "Azul intenso", "skin.silver": "Plata", "menu.close": "Cerrar", "menu.minimize": "Minimizar", "menu.about": "Acerca de mSTAGRAM", "menu.quit": "Salir de mSTAGRAM", "menu.nav": "Navegación",
                "menu.reload": "Recargar", "menu.back": "Atrás", "menu.home": "Inicio", "menu.window": "Ventana",
                "about.title": "Acerca de", "about.version": "Versión %@ (%@)",
                "about.tagline": "Instagram en su versión de móvil, en una ventana del Mac.",
                "about.authors": "starbudweiser", "about.license": "Licencia MIT",
                "about.disclaimer": "Herramienta personal independiente, sin relación con Instagram ni Meta."],
-        "it": ["menu.skin": "Finitura", "skin.orange": "Arancione cosmico", "skin.blue": "Blu intenso", "skin.silver": "Argento", "menu.close": "Chiudi", "menu.minimize": "Riduci a icona", "menu.about": "Informazioni su mSTAGRAM", "menu.quit": "Esci da mSTAGRAM", "menu.nav": "Navigazione",
+        "it": ["skin.titanium": "Titanio naturale", "skin.black": "Titanio nero", "skin.white": "Titanio bianco", "skin.desert": "Titanio deserto", "menu.skin": "Finitura", "skin.orange": "Arancione cosmico", "skin.blue": "Blu intenso", "skin.silver": "Argento", "menu.close": "Chiudi", "menu.minimize": "Riduci a icona", "menu.about": "Informazioni su mSTAGRAM", "menu.quit": "Esci da mSTAGRAM", "menu.nav": "Navigazione",
                "menu.reload": "Ricarica", "menu.back": "Indietro", "menu.home": "Home", "menu.window": "Finestra",
                "about.title": "Informazioni", "about.version": "Versione %@ (%@)",
                "about.tagline": "Instagram nella versione per telefono, in una finestra sul Mac.",
@@ -97,9 +97,13 @@ enum About {
 
 // MARK: - Habillage iPhone 17 Pro Max (écran 440×956 pt, cadre titane, îlot dynamique)
 enum Finish: String, CaseIterable {
-    case orange, blue, silver
+    case titanium, black, white, desert, orange, blue, silver
     var colors: (NSColor, NSColor) {
         switch self {
+        case .titanium: return (NSColor(srgbRed: 0.74, green: 0.70, blue: 0.65, alpha: 1), NSColor(srgbRed: 0.46, green: 0.43, blue: 0.39, alpha: 1))
+        case .black:    return (NSColor(srgbRed: 0.30, green: 0.30, blue: 0.32, alpha: 1), NSColor(srgbRed: 0.09, green: 0.09, blue: 0.10, alpha: 1))
+        case .white:    return (NSColor(srgbRed: 0.93, green: 0.92, blue: 0.90, alpha: 1), NSColor(srgbRed: 0.70, green: 0.69, blue: 0.67, alpha: 1))
+        case .desert:   return (NSColor(srgbRed: 0.80, green: 0.68, blue: 0.56, alpha: 1), NSColor(srgbRed: 0.52, green: 0.40, blue: 0.30, alpha: 1))
         case .orange: return (NSColor(srgbRed: 0.93, green: 0.52, blue: 0.27, alpha: 1), NSColor(srgbRed: 0.58, green: 0.24, blue: 0.08, alpha: 1))
         case .blue:   return (NSColor(srgbRed: 0.27, green: 0.35, blue: 0.50, alpha: 1), NSColor(srgbRed: 0.09, green: 0.13, blue: 0.22, alpha: 1))
         case .silver: return (NSColor(srgbRed: 0.90, green: 0.91, blue: 0.93, alpha: 1), NSColor(srgbRed: 0.60, green: 0.61, blue: 0.65, alpha: 1))
@@ -185,7 +189,7 @@ final class Delegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, WKU
         window.isOpaque = false; window.backgroundColor = .clear; window.hasShadow = true
         window.isMovableByWindowBackground = true; window.title = "mSTAGRAM"
         let dev = DeviceView(frame: NSRect(x: 0, y: 0, width: deviceW, height: deviceH))
-        dev.finish = Finish(rawValue: UserDefaults.standard.string(forKey: "finish") ?? "") ?? .orange
+        dev.finish = Finish(rawValue: UserDefaults.standard.string(forKey: "finish") ?? "") ?? .titanium
         device = dev
         // écran aux coins arrondis
         let scr = FlippedView(frame: NSRect(x: bezel, y: bezel, width: screenW, height: screenH)); scr.wantsLayer = true
