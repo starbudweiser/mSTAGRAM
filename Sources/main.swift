@@ -12,30 +12,30 @@ enum L10n {
         "fr": ["skin.titanium": "Titane naturel", "skin.black": "Titane noir", "skin.white": "Titane blanc", "skin.desert": "Titane désert", "menu.skin": "Coloris", "skin.orange": "Orange cosmique", "skin.blue": "Bleu intense", "skin.silver": "Argent", "menu.close": "Fermer", "menu.minimize": "Réduire", "menu.about": "À propos de mSTAGRAM", "menu.quit": "Quitter mSTAGRAM", "menu.nav": "Navigation",
                "menu.reload": "Recharger", "menu.back": "Précédent", "menu.home": "Accueil", "menu.window": "Fenêtre",
                "about.title": "À propos", "about.version": "Version %@ (%@)",
-               "about.tagline": "Instagram en version téléphone, dans une fenêtre sur le Mac.",
+               "about.collection": "Fait partie du DESKTOP MAC TOOLKIT", "about.tagline": "Instagram en version téléphone, dans une fenêtre sur le Mac.",
                "about.authors": "starbudweiser", "about.license": "Licence MIT",
                "about.disclaimer": "Outil personnel indépendant, non affilié à Instagram ni à Meta."],
         "en": ["skin.titanium": "Natural Titanium", "skin.black": "Black Titanium", "skin.white": "White Titanium", "skin.desert": "Desert Titanium", "menu.skin": "Finish", "skin.orange": "Cosmic Orange", "skin.blue": "Deep Blue", "skin.silver": "Silver", "menu.close": "Close", "menu.minimize": "Minimize", "menu.about": "About mSTAGRAM", "menu.quit": "Quit mSTAGRAM", "menu.nav": "Navigation",
                "menu.reload": "Reload", "menu.back": "Back", "menu.home": "Home", "menu.window": "Window",
                "about.title": "About", "about.version": "Version %@ (%@)",
-               "about.tagline": "Instagram in its phone version, in a window on your Mac.",
+               "about.collection": "Part of the DESKTOP MAC TOOLKIT", "about.tagline": "Instagram in its phone version, in a window on your Mac.",
                "about.authors": "starbudweiser", "about.license": "MIT licence",
                "about.disclaimer": "Independent personal tool, not affiliated with Instagram or Meta."],
         "es": ["skin.titanium": "Titanio natural", "skin.black": "Titanio negro", "skin.white": "Titanio blanco", "skin.desert": "Titanio desierto", "menu.skin": "Acabado", "skin.orange": "Naranja cósmico", "skin.blue": "Azul intenso", "skin.silver": "Plata", "menu.close": "Cerrar", "menu.minimize": "Minimizar", "menu.about": "Acerca de mSTAGRAM", "menu.quit": "Salir de mSTAGRAM", "menu.nav": "Navegación",
                "menu.reload": "Recargar", "menu.back": "Atrás", "menu.home": "Inicio", "menu.window": "Ventana",
                "about.title": "Acerca de", "about.version": "Versión %@ (%@)",
-               "about.tagline": "Instagram en su versión de móvil, en una ventana del Mac.",
+               "about.collection": "Forma parte del DESKTOP MAC TOOLKIT", "about.tagline": "Instagram en su versión de móvil, en una ventana del Mac.",
                "about.authors": "starbudweiser", "about.license": "Licencia MIT",
                "about.disclaimer": "Herramienta personal independiente, sin relación con Instagram ni Meta."],
         "it": ["skin.titanium": "Titanio naturale", "skin.black": "Titanio nero", "skin.white": "Titanio bianco", "skin.desert": "Titanio deserto", "menu.skin": "Finitura", "skin.orange": "Arancione cosmico", "skin.blue": "Blu intenso", "skin.silver": "Argento", "menu.close": "Chiudi", "menu.minimize": "Riduci a icona", "menu.about": "Informazioni su mSTAGRAM", "menu.quit": "Esci da mSTAGRAM", "menu.nav": "Navigazione",
                "menu.reload": "Ricarica", "menu.back": "Indietro", "menu.home": "Home", "menu.window": "Finestra",
                "about.title": "Informazioni", "about.version": "Versione %@ (%@)",
-               "about.tagline": "Instagram nella versione per telefono, in una finestra sul Mac.",
+               "about.collection": "Fa parte del DESKTOP MAC TOOLKIT", "about.tagline": "Instagram nella versione per telefono, in una finestra sul Mac.",
                "about.authors": "starbudweiser", "about.license": "Licenza MIT",
                "about.disclaimer": "Strumento personale indipendente, non affiliato a Instagram né a Meta."],
     ]
     static func t(_ key: String, _ args: CVarArg...) -> String {
-        let s = table[lang]?[key] ?? table["en"]?[key] ?? key
+        let s = table[lang]?[key] ?? UpdStrings.table[lang]?[key] ?? table["en"]?[key] ?? UpdStrings.table["en"]?[key] ?? key
         return args.isEmpty ? s : String(format: s, arguments: args)
     }
 }
@@ -75,7 +75,7 @@ enum About {
         let name = NSTextField(labelWithAttributedString: brandName(size: 17)); name.alignment = .center
         let views: [NSView] = [icon, name,
             label(L10n.t("about.version", info["CFBundleShortVersionString"] as? String ?? "?", info["CFBundleVersion"] as? String ?? "?"), secondary: true),
-            label(L10n.t("about.tagline")), label(L10n.t("about.authors"), bold: true), label(L10n.t("about.license")),
+            label(L10n.t("about.tagline")), label(L10n.t("about.authors"), bold: true), label(L10n.t("about.collection")), label(L10n.t("about.license")),
             label(L10n.t("about.disclaimer"), secondary: true)]
         let stack = NSStackView(views: views)
         stack.orientation = .vertical; stack.alignment = .centerX; stack.spacing = 12
@@ -207,6 +207,7 @@ final class Delegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, WKU
         web.load(URLRequest(url: url))
         window.makeKeyAndOrderFront(nil)
         buildMenu()
+        Updater.shared.start()
     }
 
     func buildMenu() {
@@ -217,6 +218,7 @@ final class Delegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, WKU
             for (t, a, k, target) in items { let mi = NSMenuItem(title: t, action: a, keyEquivalent: k); mi.target = target; m.addItem(mi) }
         }
         submenu("mSTAGRAM", [(L10n.t("menu.about"), #selector(showAbout), "", self),
+                             (L10n.t("menu.update"), #selector(showUpdate), "", self),
                              (L10n.t("menu.quit"), #selector(NSApplication.terminate(_:)), "q", nil)])
         submenu(L10n.t("menu.skin"), Finish.allCases.map { (L10n.t("skin." + $0.rawValue), #selector(setFinish(_:)), "", self) })
         submenu(L10n.t("menu.window"), [(L10n.t("menu.minimize"), #selector(NSWindow.miniaturize(_:)), "m", nil), (L10n.t("menu.close"), #selector(NSWindow.performClose(_:)), "w", nil)])
@@ -229,6 +231,7 @@ final class Delegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, WKU
         let f = Finish.allCases[i]; device.finish = f; UserDefaults.standard.set(f.rawValue, forKey: "finish")
     }
     @objc func showAbout() { About.show() }
+    @objc func showUpdate() { UpdateWindow.shared.show(); Task { await Updater.shared.check() } }
     @objc func reload() { web.reload() }
     @objc func back() { web.goBack() }
     @objc func home() { web.load(URLRequest(url: URL(string: "https://www.instagram.com/")!)) }
