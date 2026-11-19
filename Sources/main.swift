@@ -5,8 +5,12 @@ import WebKit
 // MARK: - Langues (fr, en, es, it : mêmes clés ; langue du système, anglais par défaut)
 enum L10n {
     static let lang: String = {
-        let code = (Locale.preferredLanguages.first ?? "en").prefix(2).lowercased()
-        return ["fr", "en", "es", "it"].contains(String(code)) ? String(code) : "en"
+        // Première langue préférée du système prise en charge, anglais sinon.
+        for id in Locale.preferredLanguages {
+            let code = String(id.prefix(2)).lowercased()
+            if ["fr", "en", "es", "it"].contains(code) { return code }
+        }
+        return "en"
     }()
     static let table: [String: [String: String]] = [
         "fr": ["skin.titanium": "Titane naturel", "skin.black": "Titane noir", "skin.white": "Titane blanc", "skin.desert": "Titane désert", "menu.skin": "Coloris", "skin.orange": "Orange cosmique", "skin.blue": "Bleu intense", "skin.silver": "Argent", "menu.close": "Fermer", "menu.minimize": "Réduire", "menu.about": "À propos de mSTAGRAM", "menu.quit": "Quitter mSTAGRAM", "menu.nav": "Navigation",
