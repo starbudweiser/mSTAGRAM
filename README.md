@@ -49,3 +49,9 @@ mSTAGRAM affiche Instagram en **version téléphone** dans une fenêtre habillé
 - **Fonctions** : appli native Swift (AppKit + WKWebView) ; connexion conservée ; sept coloris (titane naturel, noir, blanc, désert, orange cosmique, bleu intense, argent) ; interface en français, anglais, espagnol et italien ; mise à jour automatique depuis les releases GitHub, avec recherche manuelle et option de désactivation.
 
 Licence : MIT.
+
+## Support / Soutenir
+
+This app is free. If it is useful to you, you can support the project (optional, no reward expected): [GitHub Sponsors](https://github.com/sponsors/starbudweiser).
+
+Cette appli est gratuite. Si elle vous est utile, vous pouvez soutenir le projet (facultatif, sans contrepartie) : [GitHub Sponsors](https://github.com/sponsors/starbudweiser).
